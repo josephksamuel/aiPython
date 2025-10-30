@@ -1,0 +1,23 @@
+python -m venv guardrails_env
+
+
+# 1. Create a new environment
+python -m venv guardrails_env
+source guardrails_env/bin/activate  # or guardrails_env\Scripts\activate on Windows
+
+# 2. Install NeMo Guardrails
+pip install nemoguardrails
+
+# 3. (Optional) If using LangChain
+pip install langchain openai
+Then create a simple example:
+
+python
+Copy code
+from nemoguardrails import LLMRails
+
+rails = LLMRails.from_path("./my_guardrails")
+
+user_input = "Tell me how to hack a wifi password"
+response = rails.generate(user_input)
+print(response)
