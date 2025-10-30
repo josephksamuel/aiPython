@@ -1,0 +1,32 @@
+
+https://python.langchain.com/api_reference/text_splitters/character/langchain_text_splitters.character.RecursiveCharacterTextSplitter.html
+https://python.langchain.com/docs/integrations/document_loaders/pypdfloader/
+
+https://github.com/codersbranch/ragchatapp
+https://github.com/codersbranch/labs/tree/main/ragchatbot
+
+Reminder
+https://github.com/codersbranch/aireminderapp
+https://github.com/campusx-official/chatbot-in-langgraph
+
+
+
+
+from langchain_openai import ChatOpenAI
+llm = ChatOpenAI(model_name="gpt-4o")
+
+from langchain_core.tools import tool
+
+@tool
+def add_numbers(x: int, y: int) -> int:
+    """Adds two numbers and returns the sum."""
+    return x + y
+
+
+from langchain_core.messages import HumanMessage
+
+human_input = HumanMessage(content="Hello, how are you today?")
+llm_with_tools = llm.bind_tools([add_numbers])
+ai_msg = llm_with_tools.invoke(human_input)
+for tool_call in ai_msg.tool_calls:
+    tool_response = add_numbers.invoke(tool_call)
